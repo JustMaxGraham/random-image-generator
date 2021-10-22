@@ -12,6 +12,7 @@
   "license": "ISC",
   "dependencies": {
     "canvas": "^2.8.0",
-    "merge-images-v2": "^2.0.1"
+    "merge-images-v2": "^2.0.1",
+    "prettier": "^2.4.1"
   }
 }
