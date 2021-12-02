@@ -1,6 +1,9 @@
 # DS Store
 .DS_Store
 
+# Images
+*.png
+
 # Logs
 logs
 *.log

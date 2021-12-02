@@ -55,6 +55,17 @@ function buildImgObject() {
     imageArray: [],
   };
   folders.forEach((folder, index) => {
+    // console.log("Folder", folder.split("/")[2]);
+    let applyExtra = getRandomInt(10);
+    // console.log("Random Extra%:", getRandomInt(10));
+    // console.log(
+    //   "Add extra?: ",
+    //   folder.split("/")[2] === "5_Extra" && getRandomInt(10) <= 2
+    // );
+    if (folder.split("/")[2] === "5_Extra" && applyExtra >= 8) {
+      console.log("Extra change?:", applyExtra);
+      return;
+    }
     let currentFile = attributes[index][getRandomInt(attributes[index].length)];
     imgageObject.imageDNA += getImageDNA(currentFile);
     imgageObject.imageArray.push(`${folder}${currentFile}`);
@@ -69,7 +80,7 @@ function buildImages(num) {
   getFiles();
 
   for (let i = 0; i < num; i++) {
-    console.log("i & unique", i, uniqueAttempt);
+    // console.log("i & unique", i, uniqueAttempt);
     let imgObj = buildImgObject();
 
     if (!dnaArray.includes(imgObj.imageDNA)) {
@@ -110,7 +121,7 @@ function buildImages(num) {
         let string = imgObj.imageArray[x].split("/").slice(2);
         let obj = {
           trait_type: string[0].split("_")[1],
-          value: string[1].split("_")[1],
+          value: string[1].split("_")[1].split(".")[0],
         };
         metaData.attributes.push(obj);
       }
@@ -152,4 +163,4 @@ function buildImages(num) {
   }
 }
 
-buildImages(4);
+buildImages(10);
