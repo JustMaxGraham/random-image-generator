@@ -3,6 +3,7 @@
 
 # Images
 *.png
+*.json
 
 # Logs
 logs
