@@ -126,18 +126,21 @@ async function generateImage(imageArray, index) {
   });
 }
 
-function writeJSON(i, metaData) {
-  console.log(i, metaData);
-  return new Promise((resolve, reject) => {
+async function writeJSON(index, metaData) {
+  // console.log(index);
+  new Promise((resolve, reject) => {
     try {
       let dictstring = JSON.stringify(metaData);
-      fs.writeFile(`./images/Results/${i}.json`, dictstring, (err, results) => {
-        if (err) {
-          console.log("Errro in write JSON file");
-          // console.log(err);
+      fs.writeFile(
+        `./images/Results/${index}.json`,
+        dictstring,
+        (err, results) => {
+          if (err) {
+            console.log("Errro in write JSON file");
+            // console.log(err);
+          }
         }
-        console.log(`${i}.json CREATED`);
-      });
+      );
     } catch (ex) {
       reject(ex);
     }
@@ -203,11 +206,12 @@ async function buildImages(num) {
       try {
         await generateImage(imgObj.imageArray, i);
         console.log(`${i}.png CREATED`);
-        // await writeJSON(i, metaData);
+        await writeJSON(i, metaData);
+        console.log(`${i}.json CREATED`);
       } catch (error) {
         console.log("error in try catch: ", error);
       }
-      console.log("next loop: ", i);
+      // console.log("next loop: ", i);
       // mergeImages(imgObj.imageArray, {
       //   Canvas: Canvas,
       // }).then((b64) => {
